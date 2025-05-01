@@ -1,0 +1,278 @@
+// const { error } = require("console");
+// let fs = require("fs");
+// console.log(fs);
+
+
+// //! =========== blocking or synchronous exection======
+// //! create a file
+
+// //?method name = writeFileSync()
+// //? format = writeFileSync("path/fileName","data")
+
+
+// console.log("Start");
+
+// fs.writeFileSync("./data.text","this is second satement");
+// console.log("File created");
+
+// console.log("middle");
+// console.log("End");
+
+// //! if ofile is not present  at the given path with the given name then a new file will be create eth the given data,
+// //! if the file is already presnet , old data will be over-written by the new data
+// // without string the file is show the type error 
+
+// //! UTF-8 = uniformat transfor format 
+
+
+// //! 2) reading /fetching a file 
+
+// //? method = readFileSync()
+// //? method = readFileSync("path","encoding")
+
+// console.log("Satrt")
+// // let data = fs.readFileSync("./data.text");
+// // console.log(data.toString()); //? to convert buffer value to array we use to String()
+
+
+
+// //? encoding 
+
+// let data = fs.readFileSync("./data.text","hex")
+// console.log(data)
+// console.log("middle");
+// console.log("end")
+
+// //! copy the content of "fs.js" to new file app.js
+
+// //let content = fs.readFileSync("./fs.js","UTF-8");
+// //fs.writeFileSync("./app.js",content);
+
+// //! 3)  updating / appending a file (Append==> add at last);
+// //? method = appendFileSync();
+// //? format ==> appendFileSync("path","data to be added");
+
+
+// console.log("Start");
+
+// fs.appendFileSync("./demo.js","new data\n");
+// //? "/" ==> only forword slash root folder==> path module
+
+// console.log("middle");
+// console.log("end");
+
+// //! if the file is present it will append the data , if not the a new file will created 
+
+
+// //! 4) delecting the file 
+
+// //? method name==> unlinkSync()
+// //? format ==> unlinkSync("path");
+
+// // fs.unlinkSync("./Built-in/demo.js");
+// // console.log("File delected");
+
+// //! 5) creating a folder
+
+// //? method name ==> mkdirSync();
+// //? format ==> mkdirSync("path/folder-name");
+
+// // fs.mkdirSync("./nestedFolder");
+
+
+
+// //! create a folder structure in the current directory like this ==>
+//     //? ==> backend/controller/user.controller.js
+
+// // fs.mkdirSync("./backend");
+// // fs.mkdirSync("./backend/controller");
+// // fs.writeFileSync("./backend/controller/user.controller.js","My name nitish");
+// // console.log("Folder created");
+
+
+// //! 6) to delecte a folder
+
+// //? method name = rmdirSync()
+// //? format ==> rmdirSync("path")
+
+// // fs.rmdirSync("./nestedFolder");
+// // console.log("folder deleted")
+
+
+// //! backend/controller/user.controller.js==> delect this structure
+
+// //! fs.rmdirSync("./backend",{recursive:true},(err)=>{
+// //     console.log("folder deleted");
+// // });
+
+// // fs.unlinkSync("./backend/controller/user.controller.js")
+// // fs.rmdirSync("./backend/controller")
+// // fs.rmdirSync("./backend")
+// // console.log("controlre")
+
+
+
+// //! 7) renaming a folder/file
+
+// //? method==> renameSync()
+// //? format ==> renameSync("old- folder/file-name","new-folder/file-name")
+
+// // fs.renameSync("./data.text","./index.js");
+// // console.log("Rename the file")
+// // fs.renameSync("./Java/cc.txt","./Python/mm.js")
+// // console.log("folder")
+
+
+
+// //! creating a file asynchronosolyl
+
+// //? method name => writeFile();
+// //? format => writeFile("path/filename","data to be insetrd ",cb);
+
+// //? call stack == ain thread
+
+// console.log("Start");
+
+// //! call first errro == we pass the first argument as error , to handle file it 
+// // fs.writeFile("./demo.text","This is first line",(err)=>{
+// //     if(err) console.log(err);
+// //     console.log("File is created");
+// // })
+
+// // console.log("Midddle");
+// // console.log("End");
+
+// //! if the file is already present then it will over-written 
+
+// //! 2) reading a file 
+// //? method name ==> readFile();
+// //? format ==> readFile("path","encoding",cb)
+
+// // console.log("Staart");
+
+// // fs.readFile("./demo.text","UTF-8",(error,data)=>{
+// //     if(error) console.log("err from callback :" +error);
+// //     console.log("File read");
+// //     console.log(data);
+// // });
+
+// // console.log("Middle");
+// // console.log("End");
+
+// // //! copy the content of fs.js to "data.txt";
+
+// // fs.readFile("./fs.js","UTF-8",(err,data)=>{
+// //     if(err) console.log(err);
+
+// //     fs.writeFile("./data.text",data,(err)=>{
+// //         if(err) console.log(err);
+// //         console.log("File created");
+// //     })
+// // })
+
+// //! updating / appending a file 
+
+// //? method name = appendFile();
+// //? format = appendFile("path","new data ", cb)
+
+// // fs.appendFile("./demo.text","\n\t\t\t second line 3",(err)=>{
+// //     if(err) console.log(err);
+// //     console.log("File updated");
+// // });
+
+// //string  literals ==> ``
+
+// //! delecting a file 
+
+// //? method name = unlink();
+// //?format ==> unlink("path",cb)
+
+// // fs.unlink("./data.text",(err)=>{
+// //     if(err) console.log(err);
+// //     console.log("File Delected");
+// // })
+
+// //! Node /backend /routes /userRoutes.js
+
+// // fs.mkdir("./Node",(err)=>{
+// //     if(err) console.log("Folder is Creaded")
+// // });
+// // fs.mkdir("./Node/backend",(err)=>{
+// //     if(err) console.log("backend is Creaded")
+// // });
+// // fs.mkdir("./Node/backend/routes",(err)=>{
+// //     if(err) console.log("routes is Creaded");
+// // });
+// // fs.writeFile("./Node/backend/routes/userRoues.js",(err)=>{
+// //     if(err) console.log(err);
+// //     console.log("User Roues is Created");
+
+// // })
+
+// // console.log("Folder Creaed");
+
+
+// //! renaming the folder
+// //? method name => rename();
+// //? format ==> rename("old-folder","new-folder",cb)
+
+// fs.rename("./demo.text","demoo.txt",(err)=>{
+//     if(err) console.log(err);
+//     console.log("Folder is Rename");
+// })
+
+
+// //!============= using ten/catch============
+
+let fs =  require("fs").promises;
+
+// //? method name = writeFile();
+// //? format ==> writeFile().then().catch()
+
+console.log("Start");
+
+// let output = fs.writeFile("./data.txt","data");
+
+// output
+// .then(()=>{
+//     console.log("File is Created");
+// })
+// .catch((err)=>{
+//     console.log(err);
+// });
+
+// console.log("Middle");
+// console.log("End");
+
+
+//! 2) updating /appending a file
+// let output = fs.appendFile("./data.txt","\n this is second statement");
+
+// output.then(()=>{
+//     console.log("file updated");
+// })
+
+// .catch((err)=> {
+//     console.log(err);
+// });
+
+
+//! copy the content of "fs.js" into a new file "demo.txt"
+
+let readFile=fs.readFile("./fs.js","utf-8");
+readFile
+.then((data)=>{
+    let writeFile=fs.writeFile("./demoo.txt",data);
+    writeFile
+.then(()=>{
+    console.log("file copied");
+})
+
+.catch((err)=> {
+    console.log(err);
+});
+})
+
+.catch((err)=> {
+    console.log(err);
+});

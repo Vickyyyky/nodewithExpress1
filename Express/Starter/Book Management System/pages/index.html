@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Information Form</title>
+</head>
+<body>
+  <h2>Enter Book Details</h2>
+  <form action="/api" method="post">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="Title" required><br><br>
+
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="Author" required><br><br>
+
+    <label for="year">Year:</label><br>
+    <input type="number" id="year" name="Year" min="0" required><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
