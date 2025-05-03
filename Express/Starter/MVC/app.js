@@ -12,6 +12,7 @@
 
 const express=require("express");
 require("dotenv").config();
+const cookieParser=require("cookie-parser");
 //! require("dotenv")=> this will read the .env file and load all the variables to process.env(enviornment variables)
 //? config() => this willl parse the .env file
 
@@ -24,6 +25,10 @@ connectDB();
 const app=express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json()) //this will parse json data
+app.use(cookieParser()); // this will parse cookie data and will give some utilities to interact with cookies
+
+
+
 app.use("/v1/users",userRoutes);
 app.use("/v1/blogs",blogRoutes)
 

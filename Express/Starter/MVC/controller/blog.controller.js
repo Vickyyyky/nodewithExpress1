@@ -82,11 +82,11 @@ const updateBlog=async(req,res)=>{
        //TODO=> 404
         if(!blog) return res.status(200).json({message:"no user found"});
         let result=await blogCollection.updateOne({_id:id},{$set:req.body});
-            let updatedUser=await blogCollection.findOne({_id:id});
+            let updatedBlog=await blogCollection.findOne({_id:id});
              res.status(200).json({
                 success:true,
                 message:"user Updated Succesfully",
-                updatedUser,
+                updatedBlog,
                 result,
             });
   }
@@ -102,13 +102,18 @@ const updateBlog=async(req,res)=>{
 //! delete a blog
 const deleteBlog=async(req,res)=>{
   try{
-    let {title,description}=req.body;
-    let newBlog=await blogCollection.create({title,description});
-    res.status(201).json({
-       success:true,
-       message:"blog deleted succesfully",
-       newBlog,
-    });
+   let{id}=req.params;
+       let blog=await blogCollection.findOne({_id:id})
+       let name=blog.name;
+       const result = await blogCollection.deleteOne({ _id:id });
+       console.log("blog deleted", result);
+       // res.send(`user ${name} Deleted Succesfully`);
+       res.status(200).json({
+           success:true,
+           message:"blog deleted succesfully",
+           blog,
+           result,
+       })
   }
   catch(error){
     res.status(500).json({

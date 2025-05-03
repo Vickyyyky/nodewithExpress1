@@ -1,6 +1,7 @@
 //! 1. import the collection
 const { set } = require("mongoose");
 const userCollection=require("../models/user.models");
+const { generateToken } = require("../utils/jwt.utils");
 
 //! Define CRUD
 
@@ -94,11 +95,34 @@ let login=async(req,res)=>{
     let isMatch=await existinguser.comparePassword(password);
     // let isMatch={name:"abc"}
     if(!isMatch) return res.status(400).json({message:"invalid credantilas"});
-    res.status(200).json({success:true,message:"user login"});
+    let token=await generateToken(existinguser._id);
+    console.log(token);
+
+    res.cookie("my-cookie",token,
+        {maxAge:1*60*60*1000 //in milliseconds
+        });
+
+        // res.cookie("cookie-name",value,
+        //     {maxAge:1*60*60*1000
+        //     });
+
+    res.status(200).json({success:true,message:"user login",token});
 }
 
+let logout=async(req,res)=>{
+    res.clearCookie("my-cookie");
+    res.status(200).json({success:true,message:"user logout"});
+};
 
-module.exports={addUser,fetchAllUsers,fetchOneUser,updateUser,deleteUser,login};
+module.exports={
+    addUser,
+    fetchAllUsers,
+    fetchOneUser,
+    updateUser,
+    deleteUser,
+    login,
+    logout
+};
 
 /*
 [Object: null prototype] { id: '680893923c90869effb13666' }

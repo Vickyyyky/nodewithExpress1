@@ -3,9 +3,13 @@
 //! 3 export it
 
 const{Router}=require("express");
-const{createBlog, fetchAllBlogs, fetchOneBlog}=require("../controller/blog.controller");
+const{createBlog, fetchAllBlogs, fetchOneBlog, updateBlog, deleteBlog}=require("../controller/blog.controller");
+const { authenticate } = require("../middlewares/authenticate.middleware");
 const router=Router();
-router.post("/create",createBlog);
+router.post("/create",authenticate,createBlog); //? injecting the miidleware
+      // ? router level middleware
 router.get("/fetch",fetchAllBlogs);
 router.get("/fetchone/:id",fetchOneBlog);
+router.patch("/updateone/:id",updateBlog);
+router.delete("/delete/:id",deleteBlog)
 module.exports=router;
