@@ -8,8 +8,8 @@ const { authenticate } = require("../middlewares/authenticate.middleware");
 const router=Router();
 router.post("/create",authenticate,createBlog); //? injecting the miidleware
       // ? router level middleware
-router.get("/fetch",fetchAllBlogs);
-router.get("/fetchone/:id",fetchOneBlog);
+router.get("/fetch",authenticate,fetchAllBlogs);
+router.get("/fetchone/:id",authenticate,fetchOneBlog);
 router.patch("/updateone/:id",updateBlog);
 router.delete("/delete/:id",deleteBlog)
 module.exports=router;

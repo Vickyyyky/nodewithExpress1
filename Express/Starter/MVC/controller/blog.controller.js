@@ -8,7 +8,8 @@ const blogCollection=require("../models/blogs.model")
 const createBlog=async(req,res)=>{
   try{
     let {title,description}=req.body;
-    let newBlog=await blogCollection.create({title,description});
+    let { _id }=req.myUser;
+    let newBlog=await blogCollection.create({title,description,createdBy:_id});
     res.status(201).json({
        success:true,
        message:"blog created succesfully",
@@ -30,7 +31,7 @@ const createBlog=async(req,res)=>{
 
 const fetchAllBlogs=async(req,res)=>{
   try{
-    let blog= await blogCollection.find()
+    let blog= await blogCollection.find({createdBy:req.myUser._id});
     //    res.send(users);
     res.status(200).json({
         success:true,
@@ -57,7 +58,8 @@ const fetchOneBlog=async(req,res)=>{
         let extractedID=req.params.id;
         console.log(extractedID);
     
-        let blog =await blogCollection.findOne({ _id:extractedID});
+        let blog =await blogCollection.findOne({ _id:extractedID,createdBy:req.myUser._id});
+        
     
         if(!blog){
             return res.status(404).json({message:"no user found"})

@@ -95,7 +95,7 @@ let login=async(req,res)=>{
     let isMatch=await existinguser.comparePassword(password);
     // let isMatch={name:"abc"}
     if(!isMatch) return res.status(400).json({message:"invalid credantilas"});
-    let token=await generateToken(existinguser._id);
+    let token=await generateToken(existinguser._id,existinguser.name);
     console.log(token);
 
     res.cookie("my-cookie",token,
